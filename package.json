@@ -12,6 +12,7 @@
     "react-native": "0.57.3"
   },
   "devDependencies": {
+    "@types/react": "^16.4.18",
     "babel-jest": "23.6.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.48.1",
