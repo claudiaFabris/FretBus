@@ -1,44 +1,58 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { 
     Image, 
+    StatusBar,
     StyleSheet, 
-    View, 
     Text, 
     TextInput, 
-    TouchableOpacity 
+    TouchableOpacity, 
+    View 
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 
 // Imports
-import images from '../../config/images';
+import images from 'config/images';
 
 export default class Login extends Component {
   
     constructor(props) {
         super(props);
+
+
     }
 
     render() {
         return (
             <View style={styles.container}>
+
+                <StatusBar 
+                    backgroundColor={'#dbf0fa'}
+                    barStyle={'dark-content'}
+                />
+
                 <Image 
                     source={images.logo} 
                     style={styles.logo}
                 />
 
                 <TextInput
-                    style={styles.campos}
-                    placeholder='Usuário'
+                    style={[styles.campos, styles.campoLogin]}
+                    placeholder={'Usuário'}
+                    selectionColor={'#dbf0fa'}
                 />
                 <TextInput
-                    style={styles.campos}
-                    placeholder='Senha'
+                    style={[styles.campos, styles.campoSenha]}
+                    placeholder={'Senha'}
+                    selectionColor={'#dbf0fa'}
+                    secureTextEntry={true}
                 />
                 
                 <TouchableOpacity style={styles.botao}>
                     <Text style={styles.textoBotao}>Entrar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                
+                <TouchableOpacity onPress={() => Actions.cadastro()}>
                     <Text style={styles.textoLink}>Não possui uma conta? Cadastre-se</Text>
                 </TouchableOpacity>
             </View>
@@ -60,18 +74,27 @@ const styles = StyleSheet.create({
     },
     campos: {
         padding: 15,
-        height: 60, 
-        borderColor: 'gray', 
-        borderWidth: 2,
+        height: 70, 
+        borderColor: '#CCC', 
+        borderWidth: 1,
         borderRadius: 10,
         fontSize: 20,
         backgroundColor: 'white',
         color: 'gray',
-        marginBottom: 20,
         marginHorizontal : 20,
+    },
+    campoLogin: {
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0
+    },
+    campoSenha: {
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
+        borderTopWidth: 0
     },
     botao: {
         marginHorizontal: 20,
+        marginTop: 20,
         height: 60,
         borderRadius: 10,
         paddingTop: 15,
