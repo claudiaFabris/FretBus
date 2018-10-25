@@ -1,25 +1,15 @@
 import React, { Component } from 'react';
-import { 
-    Image, 
-    StatusBar,
-    StyleSheet, 
-    Text, 
-    TextInput, 
-    TouchableOpacity, 
-    View 
-} from 'react-native';
+import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
-
-// Imports
 import images from 'config/images';
+
 
 export default class Login extends Component {
   
     constructor(props) {
         super(props);
-
-
     }
 
     render() {
@@ -27,8 +17,8 @@ export default class Login extends Component {
             <View style={styles.container}>
 
                 <StatusBar 
-                    backgroundColor={'#dbf0fa'}
-                    barStyle={'dark-content'}
+                    backgroundColor={'#0083B7'}
+                    barStyle={'light-content'}
                 />
 
                 <Image 
@@ -39,18 +29,20 @@ export default class Login extends Component {
                 <TextInput
                     style={[styles.campos, styles.campoLogin]}
                     placeholder={'Usuário'}
-                    selectionColor={'#dbf0fa'}
                 />
                 <TextInput
                     style={[styles.campos, styles.campoSenha]}
                     placeholder={'Senha'}
-                    selectionColor={'#dbf0fa'}
                     secureTextEntry={true}
                 />
                 
-                <TouchableOpacity style={styles.botao}>
-                    <Text style={styles.textoBotao}>Entrar</Text>
-                </TouchableOpacity>
+                <Button
+                    buttonStyle={styles.botao}
+                    title={'Entrar'}
+                    icon={{name: 'send', color: '#0083B7', size: 20} }
+                    color={'#0083B7'}
+                    fontSize={20}
+                />
                 
                 <TouchableOpacity onPress={() => Actions.cadastro()}>
                     <Text style={styles.textoLink}>Não possui uma conta? Cadastre-se</Text>
@@ -63,29 +55,29 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        backgroundColor: '#dbf0fa',
+        backgroundColor: '#0083B7',
+        justifyContent: 'center'
     },
     logo: {
-        width: 200,
-        height: 200,
         alignSelf: 'center',
-        marginBottom: 20,
+        height: 200,
+        width: 200,
+        marginBottom: 20
     },
     campos: {
-        padding: 15,
-        height: 70, 
-        borderColor: '#CCC', 
-        borderWidth: 1,
+        backgroundColor: '#FFF',
+        borderColor: '#0083B7', 
         borderRadius: 10,
+        color: '#999',
         fontSize: 20,
-        backgroundColor: 'white',
-        color: 'gray',
+        height: 60, 
         marginHorizontal : 20,
+        padding: 15
     },
     campoLogin: {
         borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0
+        borderBottomRightRadius: 0,
+        borderBottomWidth: 1
     },
     campoSenha: {
         borderTopLeftRadius: 0,
@@ -93,22 +85,17 @@ const styles = StyleSheet.create({
         borderTopWidth: 0
     },
     botao: {
-        marginHorizontal: 20,
-        marginTop: 20,
         height: 60,
+        backgroundColor: '#fff',
         borderRadius: 10,
-        paddingTop: 15,
-        backgroundColor: '#245e8d'
-    },
-    textoBotao: {
-        fontSize: 20,
-        color: 'white',
-        alignSelf: 'center'
+        marginHorizontal: 5,
+        marginTop: 20,
+        paddingTop: 15
     },
     textoLink: {
-        marginTop: 30,
         alignSelf: 'center',
-        color: 'gray',
-        fontSize: 15
+        color: '#fff',
+        fontSize: 15,
+        marginTop: 30
     } 
 });

@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
-import { 
-    Image, 
-    StyleSheet, 
-    View, 
-    Text, 
-    TextInput, 
-    TouchableOpacity 
-} from 'react-native';
-
+import { View } from 'react-native';
+import { FormInput, FormLabel, FormValidationMessage} from 'react-native-elements';
 
 export default class Cadastro extends Component {
 
     render() {
         return(
-            <Text>Olá Claudinha</Text>
+            <View>
+                <FormLabel>Nome</FormLabel>
+                <FormInput />
+                <FormValidationMessage>{'Campo Obrigatório'}</FormValidationMessage>
+            </View>
         );
     };
 }
