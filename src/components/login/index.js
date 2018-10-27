@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
 import images from 'config/images';
+import styles from 'assets/styles/default';
 
 
 export default class Login extends Component {
@@ -27,21 +28,22 @@ export default class Login extends Component {
                 />
 
                 <TextInput
-                    style={[styles.campos, styles.campoLogin]}
                     placeholder={'Usuário'}
+                    style={[styles.campos, styles.primeiroCampo]}   
                 />
+
                 <TextInput
-                    style={[styles.campos, styles.campoSenha]}
                     placeholder={'Senha'}
+                    style={[styles.campos, styles.ultimoCampo]}
                     secureTextEntry={true}
                 />
                 
                 <Button
                     buttonStyle={styles.botao}
                     title={'Entrar'}
-                    icon={{name: 'send', color: '#0083B7', size: 20} }
                     color={'#0083B7'}
                     fontSize={20}
+                    icon={{name: 'send', color: '#0083B7', size: 20} }
                 />
                 
                 <TouchableOpacity onPress={() => Actions.cadastro()}>
@@ -51,51 +53,3 @@ export default class Login extends Component {
         );
     };
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#0083B7',
-        justifyContent: 'center'
-    },
-    logo: {
-        alignSelf: 'center',
-        height: 200,
-        width: 200,
-        marginBottom: 20
-    },
-    campos: {
-        backgroundColor: '#FFF',
-        borderColor: '#0083B7', 
-        borderRadius: 10,
-        color: '#999',
-        fontSize: 20,
-        height: 60, 
-        marginHorizontal : 20,
-        padding: 15
-    },
-    campoLogin: {
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
-        borderBottomWidth: 1
-    },
-    campoSenha: {
-        borderTopLeftRadius: 0,
-        borderTopRightRadius: 0,
-        borderTopWidth: 0
-    },
-    botao: {
-        height: 60,
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        marginHorizontal: 5,
-        marginTop: 20,
-        paddingTop: 15
-    },
-    textoLink: {
-        alignSelf: 'center',
-        color: '#fff',
-        fontSize: 15,
-        marginTop: 30
-    } 
-});

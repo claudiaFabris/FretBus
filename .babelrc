@@ -5,6 +5,7 @@
             "root": ["./src"],
             "extensions": [".js", ".ios.js", ".android.js"],
             "alias": {
+                "assets": "./src/assets",
                 "components": "./src/components",
                 "config": "./src/config",
                 "images": "./src/images",
