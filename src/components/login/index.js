@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Image, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Image, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { Button, FormLabel, FormInput } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
 import images from 'config/images';
@@ -8,10 +8,6 @@ import styles from 'assets/styles/default';
 
 
 export default class Login extends Component {
-  
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
@@ -27,19 +23,23 @@ export default class Login extends Component {
                     style={styles.logo}
                 />
 
-                <TextInput
-                    placeholder={'Usuário'}
-                    style={[styles.campos, styles.primeiroCampo]}   
-                />
-
-                <TextInput
-                    placeholder={'Senha'}
-                    style={[styles.campos, styles.ultimoCampo]}
-                    secureTextEntry={true}
+                <FormLabel labelStyle={styles.labels}>Usuário</FormLabel>
+                <FormInput
+                    inputStyle={styles.inputs} 
+                    placeholder={'joaoAlavrez'}
+                    placeholderTextColor={'#CCC'}
                 />
                 
+                <FormLabel labelStyle={styles.labels}>Senha</FormLabel>
+                <FormInput
+                    inputStyle={styles.inputs} 
+                    placeholder={'********'}
+                    placeholderTextColor={'#CCC'}
+                    secureTextEntry={true}
+                />
+      
                 <Button
-                    buttonStyle={styles.botao}
+                    buttonStyle={styles.button}
                     title={'Entrar'}
                     color={'#0083B7'}
                     fontSize={20}
@@ -47,7 +47,7 @@ export default class Login extends Component {
                 />
                 
                 <TouchableOpacity onPress={() => Actions.cadastro()}>
-                    <Text style={styles.textoLink}>Não possui uma conta? Cadastre-se</Text>
+                    <Text style={styles.textLink}>Não possui uma conta? Cadastre-se</Text>
                 </TouchableOpacity>
             </View>
         );
