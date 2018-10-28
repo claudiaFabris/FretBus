@@ -1,15 +1,10 @@
 import React from 'react';
-import { 
-    Router,
-    Scene,
-    Stack
- } from 'react-native-router-flux';
+import { Router, Scene, Stack } from 'react-native-router-flux';
 
- // Imports
- import Login from 'components/login';
- import Cadastro from 'components/cadastro';
+import Login from 'components/login';
+import Cadastro from 'components/cadastro';
 
- const Routes = () => {
+const Routes = () => {
 
     return(
         <Router>
