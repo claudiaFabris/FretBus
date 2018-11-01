@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Alert, Image, ScrollView, Text, View } from 'react-native';
 import { Button, FormLabel, FormInput, Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
@@ -21,35 +21,61 @@ export default class Cadastro extends Component {
             rg: '', 
             telefone: '',
             email: '', 
-            usuario: '', 
             senha: '' 
         };
+
+        this.saveUser = this.saveUser.bind(this);
     }
 
     componentWillMount() {
-        firebase.initializeApp({
-            apiKey: "AIzaSyBACpCdpjfehh2--YWyidK5P8iU4XvTNnY",
-            authDomain: "app-fretbus.firebaseapp.com",
-            databaseURL: "https://app-fretbus.firebaseio.com",
-            projectId: "app-fretbus",
-            storageBucket: "app-fretbus.appspot.com",
-            messagingSenderId: "411818722996"
-        });
+        if(!firebase.apps.length){
+            firebase.initializeApp({
+                apiKey: "AIzaSyBACpCdpjfehh2--YWyidK5P8iU4XvTNnY",
+                authDomain: "app-fretbus.firebaseapp.com",
+                databaseURL: "https://app-fretbus.firebaseio.com",
+                projectId: "app-fretbus",
+                storageBucket: "app-fretbus.appspot.com",
+                messagingSenderId: "411818722996"
+            });
+        }
     }
 
-    saveUser() {
-        let usuarios = firebase.database().ref('usuarios');
+    validationData() {
+        const {nomeCompleto, dataNascimento, cpf, rg, telefone, email, senha} = this.state;
 
-        usuarios.push().set({
-            nomeCompleto: this.state.nomeCompleto,
-            dataNascimento: this.state.dataNascimento,
-            cpf: this.state.cpf,
-            rg: this.state.rg,
-            telefone: this.state.telefone,
-            email: this.state.email,
-            usuario: this.state.usuario,
-            senha: this.state.senha
-        });
+        if(
+            nomeCompleto === '' || dataNascimento === '' || cpf === '' || rg === '' ||
+            telefone === '' || email === '' || senha === ''
+        ){
+            Alert.alert('Atenção!', 'Algum campo não foi preenchido');
+            return true;
+        }
+
+        return false;
+    }
+    
+    async saveUser() {
+        if(!this.validationData()){
+            let usuarios = await firebase.database().ref('usuarios');
+
+            usuarios.push().set({
+                nomeCompleto: this.state.nomeCompleto,
+                dataNascimento: this.state.dataNascimento,
+                cpf: this.state.cpf,
+                rg: this.state.rg,
+                telefone: this.state.telefone,
+                email: this.state.email,
+                senha: this.state.senha
+            });
+
+            await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.senha)
+                .then(() => { 
+                    Alert.alert('Sucesso!', 'Usuário cadastrado com sucesso.')
+                })
+                .catch(() => { 
+                    Alert.alert('Erro!', 'Usuário não cadastrado.')
+                });
+        }     
     }
 
     render() {
@@ -80,11 +106,12 @@ export default class Cadastro extends Component {
                             <Text style={styleRegister.title}> Dados Pessoais </Text>
                         </View>
 
-                        <FormLabel labelStyle={styles.labels}>Nome</FormLabel>
+                        <FormLabel labelStyle={styles.labels}>Nome Completo</FormLabel>
                         <FormInput
                             inputStyle={styles.inputs} 
                             placeholder={'João Alvarez Fortunato'}
                             placeholderTextColor={'#CCC'}
+                            onChangeText={(nomeCompleto) => this.setState({nomeCompleto})}
                         />
                        
                         <FormLabel labelStyle={styles.labels}>Data de Nascimento</FormLabel>
@@ -93,6 +120,8 @@ export default class Cadastro extends Component {
                             placeholder={'00-00-0000'}
                             placeholderTextColor={'#CCC'}
                             keyboardType={'numeric'}
+                            maxLength={10}
+                            onChangeText={(dataNascimento) => this.setState({dataNascimento})}
                         />
 
                         <FormLabel labelStyle={styles.labels}>CPF</FormLabel>
@@ -101,6 +130,8 @@ export default class Cadastro extends Component {
                             placeholder={'000.000.000-00'}
                             placeholderTextColor={'#CCC'}
                             keyboardType={'numeric'}
+                            maxLength={14}
+                            onChangeText={(cpf) => this.setState({cpf})}
                         />
                         
                         <FormLabel labelStyle={styles.labels}>RG</FormLabel>
@@ -109,22 +140,18 @@ export default class Cadastro extends Component {
                             placeholder={'0000000000-0'}
                             placeholderTextColor={'#CCC'}
                             keyboardType={'numeric'}
+                            maxLength={20}
+                            onChangeText={(rg) => this.setState({rg})}
                         />
                         
                         <FormLabel labelStyle={styles.labels}>Telefone</FormLabel>
                         <FormInput
                             inputStyle={styles.inputs} 
-                            placeholder={'(00) 0000-0000'}
+                            placeholder={'(00) 90000-0000'}
                             placeholderTextColor={'#CCC'}
                             keyboardType={'phone-pad'}
-                        />
-
-                        <FormLabel labelStyle={styles.labels}>Email</FormLabel>
-                        <FormInput
-                            inputStyle={styles.inputs} 
-                            placeholder={'joao.alvarez@exemplo.com'}
-                            placeholderTextColor={'#CCC'}
-                            keyboardType={'email-address'}
+                            maxLength={20}
+                            onChangeText={(telefone) => this.setState({telefone})}
                         />
                        
                     </View>
@@ -139,11 +166,13 @@ export default class Cadastro extends Component {
                             <Text style={styleRegister.title}> Dados do Perfil </Text>
                         </View>
 
-                        <FormLabel labelStyle={styles.labels}>Usuário</FormLabel>
+                        <FormLabel labelStyle={styles.labels}>Email</FormLabel>
                         <FormInput
                             inputStyle={styles.inputs} 
-                            placeholder={'jaoaAlvarez'}
+                            placeholder={'joao.alvarez@exemplo.com'}
                             placeholderTextColor={'#CCC'}
+                            keyboardType={'email-address'}
+                            onChangeText={(email) => this.setState({email})}
                         />
                        
                         <FormLabel labelStyle={styles.labels}>Senha</FormLabel>
@@ -151,18 +180,20 @@ export default class Cadastro extends Component {
                             inputStyle={styles.inputs} 
                             placeholder={'**************'}
                             placeholderTextColor={'#CCC'}
+                            maxLength={30}
                             secureTextEntry={true}
+                            onChangeText={(senha) => this.setState({senha})}
+                        />
+                            
+                        <Button
+                            buttonStyle={styles.button}
+                            title={'Cadastrar'}
+                            color={'#0083B7'}
+                            fontSize={20}
+                            icon={{name: 'check', color: '#0083B7', size: 20}}
+                            onPress={() => this.saveUser()}
                         />
                     </View>
-
-                    <Button
-                        buttonStyle={styles.button}
-                        title={'Cadastrar'}
-                        color={'#0083B7'}
-                        fontSize={20}
-                        icon={{name: 'check', color: '#0083B7', size: 20}}
-                        onPress={() => this.saveUser()}
-                    />
                 </ScrollView>
 
             </View>

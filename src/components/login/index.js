@@ -8,7 +8,7 @@ import styles from 'assets/styles/default';
 
 
 export default class Login extends Component {
-
+    
     render() {
         return (
             <View style={styles.container}>
