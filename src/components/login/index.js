@@ -26,7 +26,7 @@ export default class Login extends Component {
                 <FormLabel labelStyle={styles.labels}>Usuário</FormLabel>
                 <FormInput
                     inputStyle={styles.inputs} 
-                    placeholder={'joaoAlavrez'}
+                    placeholder={'joaoAlvarez'}
                     placeholderTextColor={'#CCC'}
                 />
                 
@@ -43,7 +43,8 @@ export default class Login extends Component {
                     title={'Entrar'}
                     color={'#0083B7'}
                     fontSize={20}
-                    icon={{name: 'send', color: '#0083B7', size: 20} }
+                    icon={{name: 'send', color: '#0083B7', size: 20}}
+                    onPress={() => Actions.principal()}
                 />
                 
                 <TouchableOpacity onPress={() => Actions.cadastro()}>

@@ -4,7 +4,7 @@ const styleRegister = StyleSheet.create({
     title: {
         color: '#FFF',
         marginLeft: 5, 
-        fontSize: 22,
+        fontSize: 22
     },
     boxTitle: {
         flexDirection: 'row',
@@ -12,7 +12,7 @@ const styleRegister = StyleSheet.create({
         marginVertical: 10
     },
     listDatas: {
-        marginBottom: 20,
+        marginBottom: 20
     }
 });
 
