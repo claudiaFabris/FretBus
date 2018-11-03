@@ -23,10 +23,10 @@ export default class Login extends Component {
                     style={styles.logo}
                 />
 
-                <FormLabel labelStyle={styles.labels}>Usuário</FormLabel>
+                <FormLabel labelStyle={styles.labels}>E-mail</FormLabel>
                 <FormInput
                     inputStyle={styles.inputs} 
-                    placeholder={'joaoAlvarez'}
+                    placeholder={'joao.alvarez@exemplo.com'}
                     placeholderTextColor={'#CCC'}
                 />
                 

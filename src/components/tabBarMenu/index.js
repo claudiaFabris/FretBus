@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { TabBar } from 'react-native-tab-view';
 
-export default props => (
-    <View>
-        <Text>FretBus</Text>
+export default class TabBarMenu extends Component {
 
-        <TabBar {...props} />
-    </View>
-)
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return(
+            <View style={{flex: 1, backgroundColor:'#000'}}>
+                <Text>FretBus</Text>
+
+                <TabBar {...props} />
+            </View>
+        ); 
+    }
+
+}
+    
