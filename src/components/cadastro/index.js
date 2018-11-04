@@ -15,16 +15,17 @@ export default class Cadastro extends Component {
         super(props);
 
         this.state = { 
-            nomeCompleto: '', 
-            dataNascimento: '', 
-            cpf: '', 
-            rg: '', 
-            telefone: '',
-            email: '', 
-            senha: '' 
+            // Fields
+            name: '', date: '', cpf: '', rg: '', 
+            phone: '', email: '', password: '',
+            // Functions
+            buttonDisabled: true
+
         };
 
-        this.saveUser = this.saveUser.bind(this);
+        this.signUp = this.signUp.bind(this);
+
+        console.disableYellowBox = true;
     }
 
     componentWillMount() {
@@ -40,42 +41,65 @@ export default class Cadastro extends Component {
         }
     }
 
-    validationData() {
-        const {nomeCompleto, dataNascimento, cpf, rg, telefone, email, senha} = this.state;
+    async fieldsInWhite() {
+        const { name, date, cpf, rg, phone, email, password } = this.state;
 
-        if(
-            nomeCompleto === '' || dataNascimento === '' || cpf === '' || rg === '' ||
-            telefone === '' || email === '' || senha === ''
-        ){
-            Alert.alert('Atenção!', 'Algum campo não foi preenchido');
-            return true;
+        if( name != '' && date != '' && cpf != '' && rg != '' &&
+            phone != '' && email != '' && password != '') {
+            
+            this.setState({ buttonDisabled: false });
+        } else {
+            this.setState({ buttonDisabled: true });
         }
-
-        return false;
     }
     
-    async saveUser() {
-        if(!this.validationData()){
-            let usuarios = await firebase.database().ref('usuarios');
+    async signUp() {
+        await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(() => {
+            const users = firebase.database().ref('usuarios');
 
-            usuarios.push().set({
-                nomeCompleto: this.state.nomeCompleto,
-                dataNascimento: this.state.dataNascimento,
+            users.push().set({
+                nome_completo: this.state.name,
+                data_nascimento: this.state.date,
                 cpf: this.state.cpf,
                 rg: this.state.rg,
-                telefone: this.state.telefone,
-                email: this.state.email,
-                senha: this.state.senha
+                telefone: this.state.phone,
+                email: this.state.email 
             });
 
-            await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.senha)
-                .then(() => { 
-                    Alert.alert('Sucesso!', 'Usuário cadastrado com sucesso.')
-                })
-                .catch(() => { 
-                    Alert.alert('Erro!', 'Usuário não cadastrado.')
-                });
-        }     
+            Alert.alert(
+                'Cadastro',
+                'Conta criada com sucesso.',
+                [
+                    {text: 'AVANÇAR', onPress: () => this.login()}
+                ]
+            );
+        })
+        .catch((error) => {
+            if(error.code == 'auth/invalid-email') {
+                Alert.alert('E-mail inválido', 'O endereço de e-mail não corresponde ao formato desejado.');
+            }
+
+            if(error.code == 'auth/email-already-in-use') {
+                Alert.alert('E-mail existente', 'O e-mail fornecido já está em uso por outro usuário.');
+            }
+
+            if(error.code == 'auth/weak-password') {
+                Alert.alert('Senha inválida', 'A senha deve conter no mínimo 6 caracteres.');
+            }
+        })
+    }
+
+    async login() {
+        await firebase.auth().onAuthStateChanged(
+            (currentUser) => {
+                if(currentUser) {
+                    Actions.principal();
+                } else {
+                    Actions.login();
+                }
+            }
+        );
     }
 
     render() {
@@ -111,7 +135,9 @@ export default class Cadastro extends Component {
                             inputStyle={styles.inputs} 
                             placeholder={'João Alvarez Fortunato'}
                             placeholderTextColor={'#CCC'}
-                            onChangeText={(nomeCompleto) => this.setState({nomeCompleto})}
+                            onChangeText={(name) => this.setState({name})}
+                            onKeyPress={() => this.fieldsInWhite()}
+                            value={this.state.name}
                         />
                        
                         <FormLabel labelStyle={styles.labels}>Data de Nascimento</FormLabel>
@@ -121,7 +147,9 @@ export default class Cadastro extends Component {
                             placeholderTextColor={'#CCC'}
                             keyboardType={'numeric'}
                             maxLength={10}
-                            onChangeText={(dataNascimento) => this.setState({dataNascimento})}
+                            onChangeText={(date) => this.setState({date})}
+                            onKeyPress={() => this.fieldsInWhite()}
+                            value={this.state.date}
                         />
 
                         <FormLabel labelStyle={styles.labels}>CPF</FormLabel>
@@ -132,6 +160,8 @@ export default class Cadastro extends Component {
                             keyboardType={'numeric'}
                             maxLength={14}
                             onChangeText={(cpf) => this.setState({cpf})}
+                            onKeyPress={() => this.fieldsInWhite()}
+                            value={this.state.cpf}
                         />
                         
                         <FormLabel labelStyle={styles.labels}>RG</FormLabel>
@@ -140,8 +170,10 @@ export default class Cadastro extends Component {
                             placeholder={'0000000000-0'}
                             placeholderTextColor={'#CCC'}
                             keyboardType={'numeric'}
-                            maxLength={20}
+                            maxLength={14}
                             onChangeText={(rg) => this.setState({rg})}
+                            onKeyPress={() => this.fieldsInWhite()}
+                            value={this.state.rg}
                         />
                         
                         <FormLabel labelStyle={styles.labels}>Telefone</FormLabel>
@@ -151,7 +183,9 @@ export default class Cadastro extends Component {
                             placeholderTextColor={'#CCC'}
                             keyboardType={'phone-pad'}
                             maxLength={20}
-                            onChangeText={(telefone) => this.setState({telefone})}
+                            onChangeText={(phone) => this.setState({phone})}
+                            onKeyPress={() => this.fieldsInWhite()}
+                            value={this.state.phone}
                         />
                        
                     </View>
@@ -166,13 +200,15 @@ export default class Cadastro extends Component {
                             <Text style={styleRegister.title}> Dados do Perfil </Text>
                         </View>
 
-                        <FormLabel labelStyle={styles.labels}>Email</FormLabel>
+                        <FormLabel labelStyle={styles.labels}>E-mail</FormLabel>
                         <FormInput
                             inputStyle={styles.inputs} 
                             placeholder={'joao.alvarez@exemplo.com'}
                             placeholderTextColor={'#CCC'}
                             keyboardType={'email-address'}
                             onChangeText={(email) => this.setState({email})}
+                            onKeyPress={() => this.fieldsInWhite()}
+                            value={this.state.email}
                         />
                        
                         <FormLabel labelStyle={styles.labels}>Senha</FormLabel>
@@ -180,18 +216,20 @@ export default class Cadastro extends Component {
                             inputStyle={styles.inputs} 
                             placeholder={'**************'}
                             placeholderTextColor={'#CCC'}
-                            maxLength={30}
                             secureTextEntry={true}
-                            onChangeText={(senha) => this.setState({senha})}
+                            onChangeText={(password) => this.setState({password})}
+                            onKeyPress={() => this.fieldsInWhite()}
+                            value={this.state.password}
                         />
-                            
+
                         <Button
                             buttonStyle={styles.button}
                             title={'Cadastrar'}
                             color={'#0083B7'}
                             fontSize={20}
                             icon={{name: 'check', color: '#0083B7', size: 20}}
-                            onPress={() => this.saveUser()}
+                            onPress={() => this.signUp()}
+                            disabled={this.state.buttonDisabled}
                         />
                     </View>
                 </ScrollView>
