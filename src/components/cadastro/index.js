@@ -20,9 +20,12 @@ export default class Cadastro extends Component {
             phone: '', email: '', password: '',
             // Functions
             buttonDisabled: true
+
         };
 
         this.signUp = this.signUp.bind(this);
+
+        console.disableYellowBox = true;
     }
 
     componentWillMount() {
@@ -68,7 +71,7 @@ export default class Cadastro extends Component {
                 'Cadastro',
                 'Conta criada com sucesso.',
                 [
-                    {text: 'OK', onPress: () => this.login()}
+                    {text: 'AVANÇAR', onPress: () => this.login()}
                 ]
             );
         })
@@ -91,9 +94,9 @@ export default class Cadastro extends Component {
         await firebase.auth().onAuthStateChanged(
             (currentUser) => {
                 if(currentUser) {
-                    alert('estou logado');
+                    Actions.principal();
                 } else {
-                    alert('não estou logado');
+                    Actions.login();
                 }
             }
         );
@@ -167,7 +170,7 @@ export default class Cadastro extends Component {
                             placeholder={'0000000000-0'}
                             placeholderTextColor={'#CCC'}
                             keyboardType={'numeric'}
-                            maxLength={20}
+                            maxLength={14}
                             onChangeText={(rg) => this.setState({rg})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.rg}
@@ -213,7 +216,6 @@ export default class Cadastro extends Component {
                             inputStyle={styles.inputs} 
                             placeholder={'**************'}
                             placeholderTextColor={'#CCC'}
-                            maxLength={30}
                             secureTextEntry={true}
                             onChangeText={(password) => this.setState({password})}
                             onKeyPress={() => this.fieldsInWhite()}
