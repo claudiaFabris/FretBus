@@ -13,6 +13,10 @@ const styleRegister = StyleSheet.create({
     },
     listDatas: {
         marginBottom: 20
+    },
+    iconBus: {
+        alignSelf: 'center',
+        color: '#FFF'
     }
 });
 

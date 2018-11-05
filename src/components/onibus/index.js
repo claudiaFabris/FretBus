@@ -4,18 +4,16 @@ import { Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
 
-export default class Eventos extends Component {
-    
+export default class Onibus extends Component {
     render(){
         return(
             <View>
                 <Icon
                         raised name='add'
                         color='#0083B7'
-                        onPress={() => Actions.cadastroEvento()} 
+                        onPress={() => Actions.cadastroOnibus()} 
                     />
             </View>
         )
     }
-
 }

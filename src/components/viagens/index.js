@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
 
-export default class Eventos extends Component {
+export default class Viagens extends Component {
     
     render(){
         return(
@@ -12,7 +12,7 @@ export default class Eventos extends Component {
                 <Icon
                         raised name='add'
                         color='#0083B7'
-                        onPress={() => Actions.cadastroEvento()} 
+                        onPress={() => Actions.cadastroViagem()} 
                     />
             </View>
         )

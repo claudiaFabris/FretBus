@@ -5,6 +5,11 @@ import Login from 'components/login';
 import Cadastro from 'components/cadastro';
 import Principal from 'components/principal';
 import Eventos from 'components/eventos';
+import Onibus from 'components/onibus';
+import Viagens from 'components/viagens';
+import CadastroEvento from 'components/cadastroEvento';
+import CadastroOnibus from 'components/cadastroOnibus';
+import CadastroViagem from 'components/cadastroViagem';
 import TabBarMenu from 'components/tabBarMenu';
 
 const Routes = () => {
@@ -31,6 +36,31 @@ const Routes = () => {
                 <Scene 
                     key={'eventos'}
                     component={Eventos}
+                    hideNavBar={true}
+                />
+                <Scene 
+                    key={'onibus'}
+                    component={Onibus}
+                    hideNavBar={true}
+                />
+                <Scene 
+                    key={'viagens'}
+                    component={Viagens}
+                    hideNavBar={true}
+                />
+                <Scene 
+                    key={'cadastroEvento'}
+                    component={CadastroEvento}
+                    hideNavBar={true}
+                />
+                <Scene 
+                    key={'cadastroOnibus'}
+                    component={CadastroOnibus}
+                    hideNavBar={true}
+                />
+                <Scene 
+                    key={'cadastroViagem'}
+                    component={CadastroViagem}
                     hideNavBar={true}
                 />
                 <Scene 
