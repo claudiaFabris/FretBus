@@ -12,6 +12,7 @@ const initialLayout = {
 };
 
 export default class Principal extends React.Component{
+
   static title = 'FretBus';
   static backgroundColor = '#0083B7';
   static appbarElevation = 0;

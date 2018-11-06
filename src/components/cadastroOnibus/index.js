@@ -10,6 +10,8 @@ export default class CadastroOnibus extends Component {
 
     constructor(props) {
         super(props);
+
+        
     }
 
     render() {
@@ -21,7 +23,7 @@ export default class CadastroOnibus extends Component {
                     <Icon
                         raised name='arrow-back'
                         color='#0083B7'
-                        onPress={() => Actions.principal()} 
+                        onPress={() => Actions.principal({paramIndex: 0})} 
                     />
 
                     <View style={styleRegister.listDatas}>

@@ -20,7 +20,6 @@ export default class Cadastro extends Component {
             phone: '', email: '', password: '',
             // Functions
             buttonDisabled: true
-
         };
 
         this.signUp = this.signUp.bind(this);

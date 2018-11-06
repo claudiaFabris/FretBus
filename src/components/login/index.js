@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
@@ -20,6 +20,53 @@ export default class Login extends Component {
             // Functions
             buttonDisabled: true 
         }
+
+        this.signIn = this.signIn.bind(this);
+
+        console.ignoredYellowBox = true;
+    }
+
+    componentWillMount() {
+        if(!firebase.apps.length){
+            firebase.initializeApp({
+                apiKey: "AIzaSyBACpCdpjfehh2--YWyidK5P8iU4XvTNnY",
+                authDomain: "app-fretbus.firebaseapp.com",
+                databaseURL: "https://app-fretbus.firebaseio.com",
+                projectId: "app-fretbus",
+                storageBucket: "app-fretbus.appspot.com",
+                messagingSenderId: "411818722996"
+            });
+        }
+    }
+
+    async fieldsInWhite() {
+        const { email, password } = this.state;
+
+        if(email != '' && password != '') { 
+            this.setState({ buttonDisabled: false });
+        } else {
+            this.setState({ buttonDisabled: true });
+        }
+    }
+
+    async signIn() {
+        await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then(() => {
+            Actions.principal();
+        })
+        .catch((error) => {
+            if(error.code == 'auth/invalid-email') {
+                Alert.alert('E-mail inválido', 'O endereço de e-mail não corresponde ao formato desejado.');
+            }
+
+            if(error.code == 'auth/user-not-found') {
+                Alert.alert('Usuário não encontrado', 'O e-mail não foi encontrado.');
+            }
+
+            if(error.code == 'auth/wrong-password') {
+                Alert.alert('Senha incorreta', 'Senha incorreta.');
+            }
+        })
     }
 
     render() {
@@ -64,8 +111,8 @@ export default class Login extends Component {
                     color={'#0083B7'}
                     fontSize={20}
                     icon={{name: 'send', color: '#0083B7', size: 20}}
-                    //onPress={() => Actions.signIn()}
-                    onPress={() => Actions.principal()}
+                    onPress={() => this.signIn()}
+                    disabled={this.state.buttonDisabled}
                 />
                 
                 <TouchableOpacity onPress={() => Actions.cadastro()}>
