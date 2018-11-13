@@ -111,7 +111,8 @@ export default class Login extends Component {
                     color={'#0083B7'}
                     fontSize={20}
                     icon={{name: 'send', color: '#0083B7', size: 20}}
-                    onPress={() => this.signIn()}
+                    //onPress={() => this.signIn()}
+                    onPress={Actions.principal()}
                     disabled={this.state.buttonDisabled}
                 />
                 

@@ -1,79 +1,73 @@
-import * as React from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import React, { Component } from 'react';
+import { Dimensions, View, Text } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+
+import styleMain from 'assets/styles/main';
 
 import Eventos from 'components/eventos';
 import Onibus from 'components/onibus';
 import Viagens from 'components/viagens';
 
 const initialLayout = {
-  height: 0,
-  width: Dimensions.get('window').width,
+    height: 0,
+    width: Dimensions.get('window').width,
 };
 
-export default class Principal extends React.Component{
+export default class Principal extends Component{
 
-  static title = 'FretBus';
-  static backgroundColor = '#0083B7';
-  static appbarElevation = 0;
+  constructor(props){
+      super(props);
 
-  state = {
-    index: 1,
-    routes: [
-      { key: 'onibus', title: 'Ônibus' },
-      { key: 'eventos', title: 'Eventos' },
-      { key: 'viagens', title: 'Viagens' },
-    ],
-  };
+      this.state = {
+          index: 1,
+          routes: [
+              { key: 'onibus', title: 'Ônibus' },
+              { key: 'eventos', title: 'Eventos' },
+              { key: 'viagens', title: 'Viagens' },
+          ],
+      };
+  }
 
-  _handleIndexChange = index =>
-    this.setState({
-      index,
-    });
+  _handleIndexChange = index => this.setState({ index });
 
   _renderTabBar = props => (
-    <TabBar
-      {...props}
-      scrollEnabled
-      indicatorStyle={styles.indicator}
-      style={styles.tabbar}
-      tabStyle={styles.tab}
-      labelStyle={styles.label}
-    />
+      <View style={styleMain.background}>
+            <View style={styleMain.menu}>
+                <Text style={styleMain.title}>FretBus</Text>
+                <Icon
+                    name='arrow-back'
+                    color='#FFF'
+                    onPress={() => Actions.login()} 
+                />   
+            </View>
+          <TabBar
+              {...props}
+              scrollEnabled
+              indicatorStyle={styleMain.indicator}
+              style={styleMain.tabbar}
+              tabStyle={styleMain.tab}
+              labelStyle={styleMain.label}
+          />
+      </View>
   );
 
   _renderScene = SceneMap({
-    onibus: Onibus,
-    eventos: Eventos,
-    viagens: Viagens,
+      onibus: Onibus,
+      eventos: Eventos,
+      viagens: Viagens,
   });
 
   render() {
-    return (
-      <TabView
-        style={[styles.container, this.props.style]}
-        navigationState={this.state}
-        renderScene={this._renderScene}
-        renderTabBar={this._renderTabBar}
-        onIndexChange={this._handleIndexChange}
-        initialLayout={initialLayout}
-      />
-    );
-  }
+      return (
+          <TabView
+              style={[styleMain.container, this.props.styleMain]}
+              navigationState={this.state}
+              renderScene={this._renderScene}
+              renderTabBar={this._renderTabBar}
+              onIndexChange={this._handleIndexChange}
+              initialLayout={initialLayout}
+          />
+      );
+    }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  tabbar: {
-    backgroundColor: '#0083B7',
-  },
-  indicator: {
-    backgroundColor: '#FFF',
-  },
-  label: {
-    color: '#FFF',
-    fontWeight: '300',
-  },
-});
