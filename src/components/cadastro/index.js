@@ -94,8 +94,6 @@ export default class Cadastro extends Component {
             (currentUser) => {
                 if(currentUser) {
                     Actions.principal();
-                } else {
-                    Actions.login();
                 }
             }
         );

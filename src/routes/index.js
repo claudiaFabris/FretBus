@@ -7,13 +7,12 @@ import Principal from 'components/principal';
 import Eventos from 'components/eventos';
 import Onibus from 'components/onibus';
 import Viagens from 'components/viagens';
-import CadastroEvento from 'components/cadastroEvento';
-import CadastroOnibus from 'components/cadastroOnibus';
-import CadastroViagem from 'components/cadastroViagem';
-import TabBarMenu from 'components/tabBarMenu';
+import CadastroEvento from 'components/eventos/cadastro';
+import CadastroOnibus from 'components/onibus/cadastro';
+import CadastroViagem from 'components/viagens/cadastro';
+
 
 const Routes = () => {
-
     return(
         <Router>
             <Stack key={'root'}>
@@ -61,11 +60,6 @@ const Routes = () => {
                 <Scene 
                     key={'cadastroViagem'}
                     component={CadastroViagem}
-                    hideNavBar={true}
-                />
-                <Scene 
-                    key={'tabBarMenu'}
-                    component={TabBarMenu}
                     hideNavBar={true}
                 />
             </Stack>

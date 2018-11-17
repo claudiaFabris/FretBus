@@ -23,6 +23,8 @@ export default class CadastroOnibus extends Component {
         };
 
         this.registerBus = this.registerBus.bind(this);
+
+        console.ignoredYellowBox = true;
     }
 
     componentWillMount() {
@@ -74,9 +76,10 @@ export default class CadastroOnibus extends Component {
                 <ScrollView>
 
                     <Icon
-                        raised name='arrow-back'
+                        raised 
+                        name='arrow-back'
                         color='#0083B7'
-                        onPress={() => Actions.principal({paramIndex: 0})} 
+                        onPress={() => Actions.principal()} 
                     />
 
                     <View style={styleRegister.listDatas}>
