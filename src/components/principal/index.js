@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions, View, Text } from 'react-native';
+import { Dimensions, View, Text, YellowBox } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
@@ -24,7 +24,9 @@ export default class Principal extends Component{
             ],
         };
 
-        this._handleIndexChange = this._handleIndexChange.bind(this, false);
+        YellowBox.ignoreWarnings = [
+            'Setting a timer'
+        ];
     }
 
     _handleIndexChange = (index) => this.setState({ index });
