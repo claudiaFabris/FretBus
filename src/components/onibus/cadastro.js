@@ -13,18 +13,11 @@ export default class CadastroOnibus extends Component {
         super(props);
 
         this.state = {
-            // Fields
-            company: '',
-            conductor: '',
-            numArmchairs: '',
-            value: '',
-            // Functions
+            company: '', conductor: '', numArmchairs: '', value: '',
             buttonDisabled: true
         };
 
         this.registerBus = this.registerBus.bind(this);
-
-        console.ignoredYellowBox = true;
     }
 
     componentWillMount() {
@@ -40,7 +33,7 @@ export default class CadastroOnibus extends Component {
         }
     }
 
-    async fieldsInWhite() {
+    fieldsInWhite() {
         const { company, conductor, numArmchairs, value } = this.state;
 
         if( company != '' && conductor != '' && numArmchairs != '' && value != '') {
@@ -50,7 +43,7 @@ export default class CadastroOnibus extends Component {
         }
     }
 
-    async registerBus() {
+    registerBus() {
         const bus = firebase.database().ref('onibus');
 
         bus.push().set({
@@ -116,6 +109,7 @@ export default class CadastroOnibus extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Número de Poltronas'}
                             placeholderTextColor={'#CCC'}
+                            keyboardType={'numeric'}
                             onChangeText={(numArmchairs) => this.setState({numArmchairs})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.numArmchairs}
@@ -126,6 +120,7 @@ export default class CadastroOnibus extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Valor do Fretamento'}
                             placeholderTextColor={'#CCC'}
+                            keyboardType={'numeric'}
                             onChangeText={(value) => this.setState({value})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.value}

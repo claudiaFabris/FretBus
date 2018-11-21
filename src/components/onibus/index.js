@@ -14,8 +14,7 @@ export default class Onibus extends Component {
                         <Icon
                             name='directions-bus'
                             color='#0083B7'
-                            size={50}
-                            onPress={() => Actions.cadastroOnibus()} 
+                            size={50} 
                         />
 
                         <View style={styles.boxInfo}>

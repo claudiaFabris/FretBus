@@ -19,7 +19,7 @@ const Routes = () => {
                 <Scene 
                     key={'login'}
                     component={Login}
-                    initial={true}
+                    
                     hideNavBar={true}
                 />
                 <Scene 
@@ -30,6 +30,7 @@ const Routes = () => {
                 <Scene 
                     key={'principal'}
                     component={Principal}
+                    initial={true}
                     hideNavBar={true}
                 />
                 <Scene 

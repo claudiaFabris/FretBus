@@ -13,15 +13,11 @@ export default class CadastroEvento extends Component {
         super(props);
 
         this.state = { 
-            // Fields
             dateEvent: '', local: '', hours: '',
-            // Functions
             buttonDisabled: true
         };
 
         this.createEvent = this.createEvent.bind(this);
-
-        console.disableYellowBox = true;
     }
 
     componentWillMount() {
@@ -37,17 +33,18 @@ export default class CadastroEvento extends Component {
         }
     }
 
-    async fieldsInWhite() {
-        const { dateEvent, local, hours, } = this.state;
-
+    fieldsInWhite = () => {
+        const { dateEvent, local, hours } = this.state;
+    
         if( dateEvent != '' && local != '' && hours != '') {
             this.setState({ buttonDisabled: false });
         } else {
             this.setState({ buttonDisabled: true });
         }
-    }
+    };
+
     
-    async createEvent() {
+    createEvent() {
         const events = firebase.database().ref('eventos');
 
         events.push().set({
@@ -71,7 +68,6 @@ export default class CadastroEvento extends Component {
             <View style={styles.container}>
 
                 <ScrollView>
-
                     <Icon
                         raised name='arrow-back'
                         color='#0083B7'
@@ -114,6 +110,7 @@ export default class CadastroEvento extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Horário de Início'}
                             placeholderTextColor={'#CCC'}
+                            keyboardType={'numeric'}
                             maxLength={5}
                             onChangeText={(hours) => this.setState({hours})}
                             onKeyPress={() => this.fieldsInWhite()}
