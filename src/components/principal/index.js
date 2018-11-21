@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-//import { Dimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
+import { Dimensions, View, Text, YellowBox } from 'react-native';
+import { Icon } from 'react-native-elements';
+import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+
+import styleMain from 'assets/styles/main';
 
 import Eventos from 'components/eventos';
 import Onibus from 'components/onibus';
