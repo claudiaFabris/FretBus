@@ -13,12 +13,7 @@ export default class CadastroViagem extends Component {
         super(props);
 
         this.state = {
-            // Fields
-            date: '',
-            source: '',
-            destiny: '',
-            bus: '',
-            // Functions
+            date: '', source: '', destiny: '', bus: '',
             buttonDisabled: true 
         };
 
@@ -38,7 +33,7 @@ export default class CadastroViagem extends Component {
         }
     }
 
-    async fieldsInWhite() {
+    fieldsInWhite() {
         const { date, source, destiny, bus } = this.state;
 
         if( date != '' && source != '' && destiny != '' && bus != '') {
@@ -48,7 +43,7 @@ export default class CadastroViagem extends Component {
         }
     }
     
-    async registerTravel() {
+    registerTravel() {
         const travelling = firebase.database().ref('viagens');
 
         travelling.push().set({
@@ -68,11 +63,10 @@ export default class CadastroViagem extends Component {
     }
 
     render() {
-        return(
+        return (
             <View style={styles.container}>
 
                 <ScrollView>
-
                     <Icon
                         raised name='arrow-back'
                         color='#0083B7'
