@@ -34,7 +34,7 @@ export default class CadastroOnibus extends Component {
     }
 
     fieldsInWhite() {
-        const { company, conductor, numArmchairs, value } = this.state;
+        const { company, conductor, numberBus, numArmchairs, value } = this.state;
 
         if( company != '' && conductor != '' && numberBus != '' && numArmchairs != '' && value != '') {
             this.setState({ buttonDisabled: false });
@@ -68,7 +68,6 @@ export default class CadastroOnibus extends Component {
             <View style={styles.container}>
 
                 <ScrollView>
-
                     <Icon
                         raised 
                         name='arrow-back'

@@ -11,7 +11,7 @@ const styleMain = StyleSheet.create({
         justifyContent: 'space-between',
         marginRight: 20
     },
-    tab_bar: {
+    tabBar: {
         backgroundColor: '#0083B7',
         elevation: 0
     },

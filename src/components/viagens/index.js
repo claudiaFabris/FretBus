@@ -50,7 +50,7 @@ export default class Viagens extends Component {
     render() {
         return (
             <View style={{flex: 1}}>
-                <ScrollView contentContainerStyle={{flex: 1}}>
+                <ScrollView style={{flex: 1}}>
                     {
                         this.state.list.map((item, key) => {
                             return (
