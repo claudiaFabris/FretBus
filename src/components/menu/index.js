@@ -22,12 +22,13 @@ export default props => {
             <View style={styleMain.menu}>
                 <Text style={styleMain.title}>FretBus</Text>
                 <Icon
+                    reverse
                     name='arrow-back'
-                    color='#FFF'
+                    color='#0083B7'
                     onPress={() => logOut()} 
-                />   
+                />
             </View>
-        
+
             <TabBar
                 {...props}
                 indicatorStyle={styleMain.indicator}
@@ -52,5 +53,8 @@ const componentWillMount = () => {
 }
 
 const logOut = () => {
-    firebase.auth().signOut().then(() => { Actions.login() });
+    firebase.auth().signOut()
+        .then(() => { 
+            Actions.login() 
+        });
 }
