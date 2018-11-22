@@ -100,7 +100,6 @@ export default class CadastroEvento extends Component {
                             placeholder={'Descrição do Evento'}
                             placeholderTextColor={'#CCC'}
                             multiline={true}
-                            maxLength={50}
                             onChangeText={(descEvent) => this.setState({descEvent})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.descEvent}

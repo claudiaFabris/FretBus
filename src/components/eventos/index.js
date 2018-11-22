@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, TouchableHighlight } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
@@ -50,7 +50,7 @@ export default class Eventos extends Component {
     render() {
         return (
             <View style={{flex: 1}}>
-                <ScrollView contentContainerStyle={{flex: 1}}>
+                <ScrollView style={{flex: 1}}>
                     {
                         this.state.list.map((item, key) => {
                             return (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Picker, ScrollView, View, Text  } from 'react-native';
+import { Alert, Picker, ScrollView, View  } from 'react-native';
 import { Button, FormLabel, FormInput, Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
@@ -89,7 +89,6 @@ export default class CadastroViagem extends Component {
                     />
 
                     <View style={styleRegister.listDatas}>
-
                         <Icon
                             name='date-range'
                             iconStyle={styleRegister.iconBus}
@@ -145,7 +144,6 @@ export default class CadastroViagem extends Component {
                             </Picker>    
                         </View>
                         
-
                         <Button
                             buttonStyle={styles.button}
                             title={'Cadastrar'}

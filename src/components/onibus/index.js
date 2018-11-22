@@ -49,7 +49,7 @@ export default class Onibus extends Component {
     render(){
         return(
             <View style={{flex: 1}}>
-                <ScrollView contentContainerStyle={{flex: 1}}>
+                <ScrollView style={{flex: 1}}>
                     {
                         this.state.list.map((item, key) => {
                             return (
@@ -66,8 +66,12 @@ export default class Onibus extends Component {
                                             {item.empresa}
                                         </Text>
                                         <Text>
-                                            <Text style={styles.textInfo}>Motorista: </Text> 
-                                            {item.motorista}
+                                            <Text style={styles.textInfo}>Proprietário: </Text> 
+                                            {item.proprietario}
+                                        </Text>
+                                        <Text>
+                                            <Text style={styles.textInfo}>Numeração: </Text> 
+                                            {item.numeracao}
                                         </Text>
                                         <Text>
                                             <Text style={styles.textInfo}>Nº de Poltronas: </Text> 
