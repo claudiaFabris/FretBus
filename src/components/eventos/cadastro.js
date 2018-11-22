@@ -13,7 +13,7 @@ export default class CadastroEvento extends Component {
         super(props);
 
         this.state = { 
-            dateEvent: '', local: '', hours: '',
+            nameEvent: '', descEvent: '', dateEvent: '', local: '', hours: '',
             buttonDisabled: true
         };
 
@@ -34,9 +34,9 @@ export default class CadastroEvento extends Component {
     }
 
     fieldsInWhite = () => {
-        const { dateEvent, local, hours } = this.state;
+        const { nameEvent, descEvent ,dateEvent, local, hours } = this.state;
     
-        if( dateEvent != '' && local != '' && hours != '') {
+        if( nameEvent != '' && descEvent != '' && dateEvent != '' && local != '' && hours != '') {
             this.setState({ buttonDisabled: false });
         } else {
             this.setState({ buttonDisabled: true });
@@ -48,6 +48,8 @@ export default class CadastroEvento extends Component {
         const events = firebase.database().ref('eventos');
 
         events.push().set({
+            nome_evento: this.state.nameEvent,
+            desc_evento: this.state.descEvent,
             data_evento: this.state.dateEvent,
             local: this.state.local,
             horario: this.state.hours
@@ -66,7 +68,6 @@ export default class CadastroEvento extends Component {
         return(
             
             <View style={styles.container}>
-
                 <ScrollView>
                     <Icon
                         raised name='arrow-back'
@@ -79,7 +80,30 @@ export default class CadastroEvento extends Component {
                         <Icon
                             name='event-note'
                             iconStyle={styleRegister.iconBus}
-                            size={150}
+                            size={100}
+                        />
+
+                        <FormLabel labelStyle={styles.labels}>Nome</FormLabel>
+                        <FormInput
+                            inputStyle={styles.inputs}
+                            placeholder={'Nome do Evento'}
+                            placeholderTextColor={'#CCC'}
+                            maxLength={30}
+                            onChangeText={(nameEvent) => this.setState({nameEvent})}
+                            onKeyPress={() => this.fieldsInWhite()}
+                            value={this.state.nameEvent}
+                        />
+
+                        <FormLabel labelStyle={styles.labels}>Descrição</FormLabel>
+                        <FormInput
+                            inputStyle={styles.inputs}
+                            placeholder={'Descrição do Evento'}
+                            placeholderTextColor={'#CCC'}
+                            multiline={true}
+                            maxLength={50}
+                            onChangeText={(descEvent) => this.setState({descEvent})}
+                            onKeyPress={() => this.fieldsInWhite()}
+                            value={this.state.descEvent}
                         />
 
                         <FormLabel labelStyle={styles.labels}>Data</FormLabel>
@@ -110,7 +134,6 @@ export default class CadastroEvento extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Horário de Início'}
                             placeholderTextColor={'#CCC'}
-                            keyboardType={'numeric'}
                             maxLength={5}
                             onChangeText={(hours) => this.setState({hours})}
                             onKeyPress={() => this.fieldsInWhite()}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, ScrollView, View } from 'react-native';
+import { Alert, Picker, ScrollView, View, Text  } from 'react-native';
 import { Button, FormLabel, FormInput, Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
@@ -13,7 +13,7 @@ export default class CadastroViagem extends Component {
         super(props);
 
         this.state = {
-            date: '', source: '', destiny: '', bus: '',
+            date: '', source: '', destiny: '', bus: '', list: [],
             buttonDisabled: true 
         };
 
@@ -34,13 +34,24 @@ export default class CadastroViagem extends Component {
     }
 
     fieldsInWhite() {
-        const { date, source, destiny, bus } = this.state;
+        const { date, source, destiny } = this.state;
 
-        if( date != '' && source != '' && destiny != '' && bus != '') {
+        if( date != '' && source != '' && destiny != '') {
             this.setState({ buttonDisabled: false });
         } else {
             this.setState({ buttonDisabled: true });
         }
+    }
+
+    listBus() {
+        const onibus = firebase.database().ref('onibus');
+
+        onibus.on('value', (snapshot) => {
+            let dados = snapshot.val();
+            let itens = dados != null ? Object.values(dados) : [];
+            
+            this.setState({list: itens});
+        });       
     }
     
     registerTravel() {
@@ -62,6 +73,10 @@ export default class CadastroViagem extends Component {
         );
     }
 
+    componentDidMount() {
+        this.listBus();
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -78,7 +93,7 @@ export default class CadastroViagem extends Component {
                         <Icon
                             name='date-range'
                             iconStyle={styleRegister.iconBus}
-                            size={150}
+                            size={100}
                         />
 
                         <FormLabel labelStyle={styles.labels}>Data</FormLabel>
@@ -114,15 +129,22 @@ export default class CadastroViagem extends Component {
                         />
 
                         <FormLabel labelStyle={styles.labels}>Ônibus</FormLabel>
-                        <FormInput
-                            inputStyle={styles.inputs}
-                            placeholder={'Ônibus escolhido para a viagem'}
-                            placeholderTextColor={'#CCC'}
-                            onChangeText={(bus) => this.setState({bus})}
-                            onKeyPress={() => this.fieldsInWhite()}
-                            value={this.state.bus}
-                            //onSelectionChange={() => {selection: {start, end}}}
-                        />
+                        <View style={styleRegister.listBus}>
+                            <Picker
+                                selectedValue={this.state.bus}
+                                onValueChange={(bus) => this.setState({bus})}
+                                style={{color: '#FFF'}}>
+                                <Picker.Item label="Selecione o ônibus para viagem" value="" />
+                                {
+                                    this.state.list.map((item, key) => 
+                                        (
+                                            <Picker.Item key={key} label={item.empresa} value={item.empresa} />
+                                        )
+                                    )
+                                }
+                            </Picker>    
+                        </View>
+                        
 
                         <Button
                             buttonStyle={styles.button}
@@ -139,5 +161,4 @@ export default class CadastroViagem extends Component {
             </View>
         );
     };
-
 }

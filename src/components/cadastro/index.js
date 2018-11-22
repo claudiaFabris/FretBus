@@ -15,16 +15,12 @@ export default class Cadastro extends Component {
         super(props);
 
         this.state = { 
-            // Fields
             name: '', date: '', cpf: '', rg: '', 
             phone: '', email: '', password: '',
-            // Functions
             buttonDisabled: true
         };
 
         this.signUp = this.signUp.bind(this);
-
-        console.disableYellowBox = true;
     }
 
     componentWillMount() {
@@ -40,7 +36,7 @@ export default class Cadastro extends Component {
         }
     }
 
-    async fieldsInWhite() {
+    fieldsInWhite() {
         const { name, date, cpf, rg, phone, email, password } = this.state;
 
         if( name != '' && date != '' && cpf != '' && rg != '' &&
@@ -100,7 +96,7 @@ export default class Cadastro extends Component {
     }
 
     render() {
-        return(
+        return (
             <View style={styles.container}>
 
                 <ScrollView>

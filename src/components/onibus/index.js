@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, YellowBox } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
@@ -12,8 +12,10 @@ export default class Onibus extends Component {
         super(props);
 
         this.state = {
-            listBus: [] 
+            list: [] 
         };
+
+        this.listBus = this.listBus.bind(this);
     }
 
     componentWillMount() {
@@ -29,44 +31,57 @@ export default class Onibus extends Component {
         }
     }
 
-    componentDidMount() {
-        const onibus = firebase.database().ref('onibus').key;
+    listBus() {
+        const onibus = firebase.database().ref('onibus');
 
         onibus.on('value', (snapshot) => {
             let dados = snapshot.val();
             let itens = dados != null ? Object.values(dados) : [];
-            console.log(itens);
-            //this.setState({listBus: dados});
+            
+            this.setState({list: itens});
         });       
+    }
+
+    componentDidMount() {
+        this.listBus();
     }
 
     render(){
         return(
             <View style={{flex: 1}}>
                 <ScrollView contentContainerStyle={{flex: 1}}>
-                    <View style={styles.box}>
-                        <Icon
-                            name='directions-bus'
-                            color='#0083B7'
-                            size={50} 
-                        />
+                    {
+                        this.state.list.map((item, key) => {
+                            return (
+                                <View key={key} style={styles.box}>
+                                    <Icon
+                                        name='directions-bus'
+                                        color='#0083B7'
+                                        size={50} 
+                                    />
 
-                        <View style={styles.boxInfo}>
-                            <Text>
-                                <Text style={styles.textInfo}>Empresa: </Text> {}
-                            </Text>
-                            <Text>
-                                <Text style={styles.textInfo}>Motorista: </Text> {}
-                            </Text>
-                            <Text>
-                                <Text style={styles.textInfo}>Nº de Poltronas: </Text> {}
-                            </Text>
-                            <Text>
-                                <Text style={styles.textInfo}>Valor do Frete: </Text> {}
-                            </Text>
-                        </View>
-                    </View>
-        
+                                    <View style={styles.boxInfo}>
+                                        <Text>
+                                            <Text style={styles.textInfo}>Empresa: </Text> 
+                                            {item.empresa}
+                                        </Text>
+                                        <Text>
+                                            <Text style={styles.textInfo}>Motorista: </Text> 
+                                            {item.motorista}
+                                        </Text>
+                                        <Text>
+                                            <Text style={styles.textInfo}>Nº de Poltronas: </Text> 
+                                            {item.numero_poltronas}
+                                        </Text>
+                                        <Text>
+                                            <Text style={styles.textInfo}>Valor do Frete: </Text> 
+                                            R$ {item.valor}
+                                        </Text>
+                                    </View>
+                                </View>
+                            )
+                        })
+                    }
                 </ScrollView>
 
                 <View style={styles.buttonFloat}>
@@ -82,3 +97,5 @@ export default class Onibus extends Component {
         )
     }
 }
+
+YellowBox.ignoreWarnings(['Setting a timer']);

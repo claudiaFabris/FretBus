@@ -13,7 +13,7 @@ export default class CadastroOnibus extends Component {
         super(props);
 
         this.state = {
-            company: '', conductor: '', numArmchairs: '', value: '',
+            company: '', conductor: '', numberBus: '', numArmchairs: '', value: '',
             buttonDisabled: true
         };
 
@@ -36,7 +36,7 @@ export default class CadastroOnibus extends Component {
     fieldsInWhite() {
         const { company, conductor, numArmchairs, value } = this.state;
 
-        if( company != '' && conductor != '' && numArmchairs != '' && value != '') {
+        if( company != '' && conductor != '' && numberBus != '' && numArmchairs != '' && value != '') {
             this.setState({ buttonDisabled: false });
         } else {
             this.setState({ buttonDisabled: true });
@@ -48,7 +48,8 @@ export default class CadastroOnibus extends Component {
 
         bus.push().set({
             empresa: this.state.company,
-            motorista: this.state.conductor,
+            proprietario: this.state.conductor,
+            numeracao: this.state.numberBus,
             numero_poltronas: this.state.numArmchairs,
             valor: this.state.value
         });
@@ -81,7 +82,7 @@ export default class CadastroOnibus extends Component {
                             name='directions-bus'
                             color='#0083B7'
                             iconStyle={styleRegister.iconBus}
-                            size={150}
+                            size={100}
                         />
 
                         <FormLabel labelStyle={styles.labels}>Empresa</FormLabel>
@@ -94,14 +95,24 @@ export default class CadastroOnibus extends Component {
                             value={this.state.company}
                         />
 
-                        <FormLabel labelStyle={styles.labels}>Motorista</FormLabel>
+                        <FormLabel labelStyle={styles.labels}>Proprietário</FormLabel>
                         <FormInput
                             inputStyle={styles.inputs}
-                            placeholder={'Nome do Motorista'}
+                            placeholder={'Nome do Proprietário'}
                             placeholderTextColor={'#CCC'}
                             onChangeText={(conductor) => this.setState({conductor})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.conductor}
+                        />
+
+                        <FormLabel labelStyle={styles.labels}>Número</FormLabel>
+                        <FormInput
+                            inputStyle={styles.inputs}
+                            placeholder={'Número do Ônibus'}
+                            placeholderTextColor={'#CCC'}
+                            onChangeText={(numberBus) => this.setState({numberBus})}
+                            onKeyPress={() => this.fieldsInWhite()}
+                            value={this.state.numberBus}
                         />
 
                         <FormLabel labelStyle={styles.labels}>Nº de Poltronas</FormLabel>

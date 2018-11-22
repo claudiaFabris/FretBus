@@ -2,11 +2,15 @@ import React from 'react';
 import { View, Text, StatusBar } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { TabBar } from 'react-native-tab-view';
+import { Actions } from 'react-native-router-flux';
 
+import firebase from 'firebase';
 import styleMain from 'assets/styles/main';
 
 export default props => {
 
+    componentWillMount();
+    
     return (
         <View style={styleMain.container}>
 
@@ -20,7 +24,7 @@ export default props => {
                 <Icon
                     name='arrow-back'
                     color='#FFF'
-                    onPress={() => Actions.login()} 
+                    onPress={() => logOut()} 
                 />   
             </View>
         
@@ -32,4 +36,21 @@ export default props => {
             />
         </View>
     );
+}
+
+const componentWillMount = () => {
+    if(!firebase.apps.length){
+        firebase.initializeApp({
+            apiKey: "AIzaSyBACpCdpjfehh2--YWyidK5P8iU4XvTNnY",
+            authDomain: "app-fretbus.firebaseapp.com",
+            databaseURL: "https://app-fretbus.firebaseio.com",
+            projectId: "app-fretbus",
+            storageBucket: "app-fretbus.appspot.com",
+            messagingSenderId: "411818722996"
+        });
+    }
+}
+
+const logOut = () => {
+    firebase.auth().signOut().then(() => { Actions.login() });
 }

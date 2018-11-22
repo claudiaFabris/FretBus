@@ -17,6 +17,13 @@ const styleRegister = StyleSheet.create({
     iconBus: {
         alignSelf: 'center',
         color: '#FFF'
+    },
+    listBus: {
+        color: '#FFF', 
+        borderBottomColor: '#FFF', 
+        borderBottomWidth: 2, 
+        marginHorizontal: 15,
+        fontSize: 22
     }
 });
 

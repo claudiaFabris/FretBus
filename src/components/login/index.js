@@ -22,8 +22,6 @@ export default class Login extends Component {
         }
 
         this.signIn = this.signIn.bind(this);
-
-        console.ignoredYellowBox = true;
     }
 
     componentWillMount() {
@@ -39,7 +37,7 @@ export default class Login extends Component {
         }
     }
 
-    async fieldsInWhite() {
+    fieldsInWhite() {
         const { email, password } = this.state;
 
         if(email != '' && password != '') { 
@@ -111,8 +109,7 @@ export default class Login extends Component {
                     color={'#0083B7'}
                     fontSize={20}
                     icon={{name: 'send', color: '#0083B7', size: 20}}
-                    //onPress={() => this.signIn()}
-                    onPress={Actions.principal()}
+                    onPress={() => this.signIn()}
                     disabled={this.state.buttonDisabled}
                 />
                 
