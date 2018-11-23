@@ -64,7 +64,7 @@ export default props => {
                             reverse
                             name='more-vert'
                             color='#0083B7'
-                            iconStyle={{marginTop: 6}}
+                            iconStyle={{marginTop: 6, marginLeft: 30}}
                             onPress={() => this.showMenu()}
                         />   
                     }>
