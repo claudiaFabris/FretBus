@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Alert, ScrollView, View } from 'react-native';
+import { Alert, Picker, ScrollView, View } from 'react-native';
 import { Button, FormLabel, FormInput, Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
 import firebase from 'firebase';
 import styles from 'assets/styles/default';
 import styleRegister from 'assets/styles/register';
+import estados from 'config/estados';
 
 export default class CadastroEvento extends Component {
 
@@ -13,7 +14,8 @@ export default class CadastroEvento extends Component {
         super(props);
 
         this.state = { 
-            nameEvent: '', descEvent: '', dateEvent: '', local: '', hours: '',
+            nameEvent: '', descEvent: '', dateEvent: '', 
+            city: '', uf: '', hours: '',
             buttonDisabled: true
         };
 
@@ -34,9 +36,9 @@ export default class CadastroEvento extends Component {
     }
 
     fieldsInWhite = () => {
-        const { nameEvent, descEvent ,dateEvent, local, hours } = this.state;
+        const { nameEvent, descEvent, dateEvent, city, hours } = this.state;
     
-        if( nameEvent != '' && descEvent != '' && dateEvent != '' && local != '' && hours != '') {
+        if( nameEvent != '' && descEvent != '' && dateEvent != '' && city != '' && hours != '') {
             this.setState({ buttonDisabled: false });
         } else {
             this.setState({ buttonDisabled: true });
@@ -51,7 +53,8 @@ export default class CadastroEvento extends Component {
             nome_evento: this.state.nameEvent,
             desc_evento: this.state.descEvent,
             data_evento: this.state.dateEvent,
-            local: this.state.local,
+            cidade: this.state.city,
+            uf: this.state.uf,
             horario: this.state.hours
         });
 
@@ -117,16 +120,33 @@ export default class CadastroEvento extends Component {
                             value={this.state.dateEvent}
                         />
 
-                        <FormLabel labelStyle={styles.labels}>Local</FormLabel>
+                        <FormLabel labelStyle={styles.labels}>Cidade</FormLabel>
                         <FormInput
                             inputStyle={styles.inputs}
-                            placeholder={'Local do Evento'}
+                            placeholder={'Cidade do Evento'}
                             placeholderTextColor={'#CCC'}
                             maxLength={40}
-                            onChangeText={(local) => this.setState({local})}
+                            onChangeText={(city) => this.setState({city})}
                             onKeyPress={() => this.fieldsInWhite()}
-                            value={this.state.local}
+                            value={this.state.city}
                         />
+
+                        <FormLabel labelStyle={styles.labels}>UF</FormLabel>
+                        <View style={[styles.inputs, {marginHorizontal: 15}]}>
+                            <Picker
+                                selectedValue={this.state.uf}
+                                onValueChange={(uf) => this.setState({uf})}
+                                style={{color: '#FFF'}}>
+                                <Picker.Item label="Selecione o estado do evento" value="" />
+                                {
+                                    estados.map((estado, key) => 
+                                        (
+                                            <Picker.Item key={key} label={estado.uf} value={estado.uf} />
+                                        )
+                                    )
+                                }
+                            </Picker>  
+                        </View>
 
                         <FormLabel labelStyle={styles.labels}>Horário</FormLabel>
                         <FormInput

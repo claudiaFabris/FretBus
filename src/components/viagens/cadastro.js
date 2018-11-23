@@ -6,6 +6,7 @@ import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import styles from 'assets/styles/default';
 import styleRegister from 'assets/styles/register';
+import estados from 'config/estados';
 
 export default class CadastroViagem extends Component {
 
@@ -13,7 +14,8 @@ export default class CadastroViagem extends Component {
         super(props);
 
         this.state = {
-            date: '', source: '', destiny: '', bus: '', list: [],
+            date: '', citySource: '', cityDestiny: '', 
+            uf: '', bus: '', list: [],
             buttonDisabled: true 
         };
 
@@ -34,9 +36,9 @@ export default class CadastroViagem extends Component {
     }
 
     fieldsInWhite() {
-        const { date, source, destiny } = this.state;
+        const { date, citySource, cityDestiny } = this.state;
 
-        if( date != '' && source != '' && destiny != '') {
+        if( date != '' && citySource != '' && cityDestiny != '') {
             this.setState({ buttonDisabled: false });
         } else {
             this.setState({ buttonDisabled: true });
@@ -59,8 +61,9 @@ export default class CadastroViagem extends Component {
 
         travelling.push().set({
             data_viagem: this.state.date,
-            origem: this.state.source,
-            destino: this.state.destiny,
+            cidade_origem: this.state.citySource,
+            cidade_destino: this.state.cityDestiny,
+            uf: this.state.uf,
             bus: this.state.bus
         });
 
@@ -110,7 +113,7 @@ export default class CadastroViagem extends Component {
                         <FormLabel labelStyle={styles.labels}>Origem</FormLabel>
                         <FormInput
                             inputStyle={styles.inputs}
-                            placeholder={'Local de Saída'}
+                            placeholder={'Cidade da Saída'}
                             placeholderTextColor={'#CCC'}
                             onChangeText={(source) => this.setState({source})}
                             onKeyPress={() => this.fieldsInWhite()}
@@ -120,12 +123,29 @@ export default class CadastroViagem extends Component {
                         <FormLabel labelStyle={styles.labels}>Destino</FormLabel>
                         <FormInput
                             inputStyle={styles.inputs}
-                            placeholder={'Local de Chegada'}
+                            placeholder={'Cidade da Chegada'}
                             placeholderTextColor={'#CCC'}
                             onChangeText={(destiny) => this.setState({destiny})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.destiny}
                         />
+
+                        <FormLabel labelStyle={styles.labels}>UF</FormLabel>
+                        <View style={[styles.inputs, {marginHorizontal: 15}]}>
+                            <Picker
+                                selectedValue={this.state.uf}
+                                onValueChange={(uf) => this.setState({uf})}
+                                style={{color: '#FFF'}}>
+                                <Picker.Item label="Selecione o estado da viagem" value="" />
+                                {
+                                    estados.map((estado, key) => 
+                                        (
+                                            <Picker.Item key={key} label={estado.uf} value={estado.uf} />
+                                        )
+                                    )
+                                }
+                            </Picker>  
+                        </View>
 
                         <FormLabel labelStyle={styles.labels}>Ônibus</FormLabel>
                         <View style={styleRegister.listBus}>
