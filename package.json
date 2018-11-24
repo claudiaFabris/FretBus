@@ -19,6 +19,7 @@
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.48.1",
     "react-native-elements": "^0.19.1",
+    "react-native-maps": "^0.22.1",
     "react-native-material-menu": "^0.4.1",
     "react-native-router-flux": "^4.0.5",
     "react-native-tab-view": "^1.2.0",
