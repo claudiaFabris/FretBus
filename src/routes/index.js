@@ -10,6 +10,7 @@ import Viagens from 'components/viagens';
 import CadastroEvento from 'components/eventos/cadastro';
 import CadastroOnibus from 'components/onibus/cadastro';
 import CadastroViagem from 'components/viagens/cadastro';
+import DetalheEvento from 'components/eventos/detalhes';
 
 
 const Routes = () => {
@@ -61,6 +62,11 @@ const Routes = () => {
                 <Scene 
                     key={'cadastroViagem'}
                     component={CadastroViagem}
+                    hideNavBar={true}
+                />
+                <Scene 
+                    key={'detalheEvento'}
+                    component={DetalheEvento}
                     hideNavBar={true}
                 />
             </Stack>
