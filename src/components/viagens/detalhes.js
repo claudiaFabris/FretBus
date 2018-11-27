@@ -71,7 +71,7 @@ export default class DetalheViagem extends Component {
                         <Text style={styles.textEvent}>
                             {`Saída de ${this.props.viagem.cidade_origem} para ${this.props.viagem.cidade_destino}`}
                         </Text>
-                        <Text style={styles.textDate}>{this.props.viagem.data_viagem}</Text>
+                        <Text style={styles.textDate}>{this.props.viagem.data_viagem.replace(/-/g, '/')}</Text>
                     </View>
 
                     <Button
@@ -85,7 +85,7 @@ export default class DetalheViagem extends Component {
                                 'Pronto!',
                                 `Sua solicitação para participação da viagem foi enviada para o organizador. Aguarde a aceitação dele.`,
                                 [
-                                    {text: 'Concluir', onPress: () => Actions.principal({index: 2})}
+                                    {text: 'CONCLUIR', onPress: () => Actions.principal({index: 2})}
                                 ]
                             );}
                         }

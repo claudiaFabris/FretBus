@@ -65,7 +65,7 @@ export default class Viagens extends Component {
                                         <View style={styles.boxInfo}>
                                             <Text>
                                                 <Text style={styles.textInfo}>Data: </Text> 
-                                                {item.data_viagem}
+                                                {item.data_viagem.replace(/-/g, '/')}
                                             </Text>
                                             <Text>
                                                 <Text style={styles.textInfo}>Origem: </Text> 

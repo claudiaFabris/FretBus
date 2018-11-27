@@ -69,7 +69,7 @@ export default class Eventos extends Component {
                                             </Text>
                                             <Text>
                                                 <Text style={styles.textInfo}>Data: </Text> 
-                                                {item.data_evento}
+                                                {item.data_evento.replace(/-/g, '/')}
                                             </Text>
                                             <Text>
                                                 <Text style={styles.textInfo}>Local: </Text> 

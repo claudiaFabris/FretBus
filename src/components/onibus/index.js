@@ -12,7 +12,7 @@ export default class Onibus extends Component {
         super(props);
 
         this.state = {
-            list: [] 
+            list: []
         };
 
         this.listBus = this.listBus.bind(this);
@@ -46,8 +46,8 @@ export default class Onibus extends Component {
         this.listBus();
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <View style={{flex: 1}}>
                 <ScrollView style={{flex: 1}}>
                     {

@@ -10,6 +10,14 @@ import styles from 'assets/styles/profile';
 
 export default class Perfil extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            name: '', cpf: '', rg: '', email: '', phone: '', date: ''
+        };
+    }
+
     componentWillMount() {
         if(!firebase.apps.length){
             firebase.initializeApp({
@@ -21,6 +29,34 @@ export default class Perfil extends Component {
                 messagingSenderId: "411818722996"
             });
         }
+    }
+
+    dataUser() {
+        const usuarios = firebase.database().ref('usuarios');
+        const usuarioLogado = firebase.auth().currentUser;
+
+        usuarios.on('value', (snapshot) => {
+            let dados = snapshot.val();
+            let users = dados != null ? Object.values(dados) : [];
+            
+            users.forEach((user) => {
+                if(usuarioLogado.email === user.email) {
+                    this.setState({
+                        name: user.nome_completo,
+                        cpf: user.cpf,
+                        rg: user.rg,
+                        email: user.email,
+                        phone: user.telefone,
+                        date: user.data_nascimento
+                    });
+                }
+            });
+        
+        }); 
+    }
+
+    componentDidMount() {
+        this.dataUser();
     }
 
     render() {
@@ -42,27 +78,27 @@ export default class Perfil extends Component {
 
                 <View style={styles.boxDatasUser}>
                     <Text style={styles.inputText}>Nome</Text>
-                    <Text>Maurício de Souza Porfírio</Text>
+                    <Text style={styles.valueText}>{this.state.name}</Text>
+                    <Text style={styles.inputText}>E-mail</Text>
+                    <Text style={styles.valueText}>{this.state.email}</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <View>
                             <Text style={styles.inputText}>CPF</Text>
-                            <Text>000.000.000-00</Text>
+                            <Text style={styles.valueText}>{this.state.cpf}</Text>
                         </View>
                         <View>
                             <Text style={styles.inputText}>RG</Text>
-                            <Text>0000000000-0</Text>
+                            <Text style={styles.valueText}>{this.state.rg}</Text>
                         </View>
                     </View>
-                    <Text style={styles.inputText}>E-mail</Text>
-                    <Text>mauriciosporfirio@gmail.com</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <View>
                             <Text style={styles.inputText}>Telefone</Text>
-                            <Text>(85) 9.8404-0835</Text>
+                            <Text style={styles.valueText}>{this.state.phone}</Text>
                         </View>
                         <View>
                             <Text style={styles.inputText}>Data de nascimento</Text>
-                            <Text>13-05-1997</Text>
+                            <Text style={styles.valueText}>{this.state.date.replace(/-/g, '/')}</Text>
                         </View>
                     </View>
                 </View>

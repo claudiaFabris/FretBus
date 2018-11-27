@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#0083B7',
         marginTop: 20
+    },
+    valueText: {
+        fontSize: 14,
+        color: '#999'
     }
 });
 

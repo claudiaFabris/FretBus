@@ -58,7 +58,7 @@ export default class CadastroOnibus extends Component {
             'Sucesso!',
             'Ônibus cadastrado com sucesso!!',
             [
-                {text: 'Concluir', onPress: () => Actions.principal({index: 0})}
+                {text: 'CONCLUIR', onPress: () => Actions.principal({index: 0})}
             ]
         );
     }

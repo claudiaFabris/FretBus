@@ -55,7 +55,7 @@ export default class DetalheEvento extends Component {
                     <View style={styles.boxEvent}>
                         <Text style={styles.textTitle}>{this.props.evento.nome_evento}</Text>
                         <Text style={styles.textEvent}>{this.props.evento.desc_evento}</Text>
-                        <Text style={styles.textDate}>{`${this.props.evento.data_evento} às ${this.props.evento.horario}`}</Text>
+                        <Text style={styles.textDate}>{`${this.props.evento.data_evento.replace(/-/g, '/')} às ${this.props.evento.horario}`}</Text>
                     </View>
 
                     <Button
@@ -69,7 +69,7 @@ export default class DetalheEvento extends Component {
                                 'Pronto!',
                                 `Sua solicitação para participação do evento ${this.props.evento.nome_evento} foi enviada para o organizador. Aguarde a aceitação dele.`,
                                 [
-                                    {text: 'Concluir', onPress: () => Actions.principal({index: 1})}
+                                    {text: 'CONCLUIR', onPress: () => Actions.principal({index: 1})}
                                 ]
                             );}
                         }
