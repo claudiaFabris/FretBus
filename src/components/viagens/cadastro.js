@@ -71,7 +71,7 @@ export default class CadastroViagem extends Component {
             'Sucesso!',
             'Viagem cadastrada com sucesso!!',
             [
-                {text: 'Concluir', onPress: () => Actions.principal()}
+                {text: 'Concluir', onPress: () => Actions.principal({index: 2})}
             ]
         );
     }
@@ -88,7 +88,7 @@ export default class CadastroViagem extends Component {
                     <Icon
                         raised name='arrow-back'
                         color='#0083B7'
-                        onPress={() => Actions.principal()} 
+                        onPress={() => Actions.principal({index: 2})} 
                     />
 
                     <View style={styleRegister.listDatas}>
@@ -115,9 +115,9 @@ export default class CadastroViagem extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Cidade da Saída'}
                             placeholderTextColor={'#CCC'}
-                            onChangeText={(source) => this.setState({source})}
+                            onChangeText={(citySource) => this.setState({citySource})}
                             onKeyPress={() => this.fieldsInWhite()}
-                            value={this.state.source}
+                            value={this.state.citySource}
                         />
 
                         <FormLabel labelStyle={styles.labels}>Destino</FormLabel>
@@ -125,12 +125,12 @@ export default class CadastroViagem extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Cidade da Chegada'}
                             placeholderTextColor={'#CCC'}
-                            onChangeText={(destiny) => this.setState({destiny})}
+                            onChangeText={(cityDestiny) => this.setState({cityDestiny})}
                             onKeyPress={() => this.fieldsInWhite()}
-                            value={this.state.destiny}
+                            value={this.state.cityDestiny}
                         />
 
-                        <FormLabel labelStyle={styles.labels}>UF</FormLabel>
+                        <FormLabel labelStyle={styles.labels}>Estado</FormLabel>
                         <View style={[styles.inputs, {marginHorizontal: 15}]}>
                             <Picker
                                 selectedValue={this.state.uf}

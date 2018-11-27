@@ -58,7 +58,7 @@ export default class CadastroOnibus extends Component {
             'Sucesso!',
             'Ônibus cadastrado com sucesso!!',
             [
-                {text: 'Concluir', onPress: () => Actions.principal()}
+                {text: 'Concluir', onPress: () => Actions.principal({index: 0})}
             ]
         );
     }
@@ -72,7 +72,7 @@ export default class CadastroOnibus extends Component {
                         raised 
                         name='arrow-back'
                         color='#0083B7'
-                        onPress={() => Actions.principal()} 
+                        onPress={() => Actions.principal({index: 0})} 
                     />
 
                     <View style={styleRegister.listDatas}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { Alert, View, ScrollView, Text } from 'react-native';
+import { Button } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 
@@ -64,6 +64,15 @@ export default class DetalheEvento extends Component {
                         color={'#FFF'}
                         fontSize={20}
                         icon={{name: 'check', color: '#FFF', size: 20}}
+                        onPress={()=> { 
+                            Alert.alert(
+                                'Pronto!',
+                                `Sua solicitação para participação do evento ${this.props.evento.nome_evento} foi enviada para o organizador. Aguarde a aceitação dele.`,
+                                [
+                                    {text: 'Concluir', onPress: () => Actions.principal({index: 1})}
+                                ]
+                            );}
+                        }
                     />
                 </ScrollView>
             </View>

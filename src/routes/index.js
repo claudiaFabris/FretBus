@@ -11,6 +11,7 @@ import CadastroEvento from 'components/eventos/cadastro';
 import CadastroOnibus from 'components/onibus/cadastro';
 import CadastroViagem from 'components/viagens/cadastro';
 import DetalheEvento from 'components/eventos/detalhes';
+import DetalheViagem from 'components/viagens/detalhes';
 
 
 const Routes = () => {
@@ -20,7 +21,7 @@ const Routes = () => {
                 <Scene 
                     key={'login'}
                     component={Login}
-                    
+                    initial={true}
                     hideNavBar={true}
                 />
                 <Scene 
@@ -31,7 +32,6 @@ const Routes = () => {
                 <Scene 
                     key={'principal'}
                     component={Principal}
-                    initial={true}
                     hideNavBar={true}
                 />
                 <Scene 
@@ -67,6 +67,11 @@ const Routes = () => {
                 <Scene 
                     key={'detalheEvento'}
                     component={DetalheEvento}
+                    hideNavBar={true}
+                />
+                 <Scene 
+                    key={'detalheViagem'}
+                    component={DetalheViagem}
                     hideNavBar={true}
                 />
             </Stack>

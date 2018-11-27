@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
@@ -54,32 +54,34 @@ export default class Viagens extends Component {
                     {
                         this.state.list.map((item, key) => {
                             return (
-                                <View key={key} style={styles.box}>
-                                    <Icon
-                                        name='date-range'
-                                        color='#0083B7'
-                                        size={50} 
-                                    />
+                                <TouchableOpacity key={key} onPress={() => {Actions.detalheViagem({viagem: item})}}>
+                                    <View style={styles.box}>
+                                        <Icon
+                                            name='date-range'
+                                            color='#0083B7'
+                                            size={50} 
+                                        />
 
-                                    <View style={styles.boxInfo}>
-                                        <Text>
-                                            <Text style={styles.textInfo}>Data: </Text> 
-                                            {item.data_viagem}
-                                        </Text>
-                                        <Text>
-                                            <Text style={styles.textInfo}>Origem: </Text> 
-                                            {item.origem}
-                                        </Text>
-                                        <Text>
-                                            <Text style={styles.textInfo}>Destino: </Text> 
-                                            {item.destino}
-                                        </Text>
-                                        <Text>
-                                            <Text style={styles.textInfo}>Ônibus: </Text> 
-                                            {item.bus}
-                                        </Text>
+                                        <View style={styles.boxInfo}>
+                                            <Text>
+                                                <Text style={styles.textInfo}>Data: </Text> 
+                                                {item.data_viagem}
+                                            </Text>
+                                            <Text>
+                                                <Text style={styles.textInfo}>Origem: </Text> 
+                                                {item.cidade_origem}
+                                            </Text>
+                                            <Text>
+                                                <Text style={styles.textInfo}>Destino: </Text> 
+                                                {item.cidade_destino}
+                                            </Text>
+                                            <Text>
+                                                <Text style={styles.textInfo}>Ônibus: </Text> 
+                                                {item.bus}
+                                            </Text>
+                                        </View>
                                     </View>
-                                </View>
+                                </TouchableOpacity>
                             )
                         })
                     }

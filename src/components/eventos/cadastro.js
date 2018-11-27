@@ -36,9 +36,10 @@ export default class CadastroEvento extends Component {
     }
 
     fieldsInWhite = () => {
-        const { nameEvent, descEvent, dateEvent, city, hours } = this.state;
+        const { nameEvent, descEvent, dateEvent, city, uf, hours } = this.state;
     
-        if( nameEvent != '' && descEvent != '' && dateEvent != '' && city != '' && hours != '') {
+        if( nameEvent != '' && descEvent != '' && dateEvent != '' 
+            && uf != '' && city != '' && hours != '') {
             this.setState({ buttonDisabled: false });
         } else {
             this.setState({ buttonDisabled: true });
@@ -62,7 +63,7 @@ export default class CadastroEvento extends Component {
             'Sucesso!',
             'Evento cadastrado com sucesso!!',
             [
-                {text: 'Concluir', onPress: () => Actions.principal()}
+                {text: 'Concluir', onPress: () => Actions.principal({index: 1})}
             ]
         );
     }
@@ -75,7 +76,7 @@ export default class CadastroEvento extends Component {
                     <Icon
                         raised name='arrow-back'
                         color='#0083B7'
-                        onPress={() => Actions.principal()} 
+                        onPress={() => Actions.principal({index: 1})} 
                     />
 
                     <View style={styleRegister.listDatas}>
@@ -115,7 +116,7 @@ export default class CadastroEvento extends Component {
                             placeholderTextColor={'#CCC'}
                             keyboardType={'numeric'}
                             maxLength={10}
-                            onChangeText={(dateEvent) => this.setState({dateEvent})}
+                            onCha00ngeText={(dateEvent) => this.setState({dateEvent})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.dateEvent}
                         />
@@ -131,7 +132,7 @@ export default class CadastroEvento extends Component {
                             value={this.state.city}
                         />
 
-                        <FormLabel labelStyle={styles.labels}>UF</FormLabel>
+                        <FormLabel labelStyle={styles.labels}>Estado</FormLabel>
                         <View style={[styles.inputs, {marginHorizontal: 15}]}>
                             <Picker
                                 selectedValue={this.state.uf}

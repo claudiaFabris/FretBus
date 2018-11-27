@@ -8,7 +8,7 @@ import TabBarMenu from 'components/menu';
 
 export default class Principal extends Component {
     state = {
-        index: 0,
+        index: this.props.index ? this.props.index : 0,
         routes: [
             { key: '1', title: 'Ônibus' },
             { key: '2', title: 'Eventos' },
