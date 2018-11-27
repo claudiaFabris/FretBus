@@ -14,10 +14,7 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            // Fields
-            email: '',
-            password: '',
-            // Functions
+            email: '', password: '',
             buttonDisabled: true 
         }
 
@@ -47,8 +44,8 @@ export default class Login extends Component {
         }
     }
 
-    async signIn() {
-        await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+    signIn() {
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(() => {
             Actions.principal();
         })

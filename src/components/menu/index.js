@@ -13,7 +13,7 @@ export default props => {
 
     menu = null;
 
-    setMenuRef = ref => {
+    setMenuRef = (ref) => {
         this.menu = ref;
     };
 
@@ -68,7 +68,10 @@ export default props => {
                             onPress={() => this.showMenu()}
                         />   
                     }>
-                    <MenuItem>Perfil</MenuItem>
+                    <MenuItem onPress={() => {
+                        Actions.perfil()
+                        this.hideMenu()
+                    }}>Perfil</MenuItem>
                     <MenuDivider />
                     <MenuItem onPress={() => this.logOut()}>Sair</MenuItem>
                 </Menu>

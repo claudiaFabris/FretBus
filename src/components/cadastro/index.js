@@ -48,8 +48,8 @@ export default class Cadastro extends Component {
         }
     }
     
-    async signUp() {
-        await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+    signUp() {
+        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(() => {
             const users = firebase.database().ref('usuarios');
 
@@ -85,8 +85,8 @@ export default class Cadastro extends Component {
         })
     }
 
-    async login() {
-        await firebase.auth().onAuthStateChanged(
+    login() {
+        firebase.auth().onAuthStateChanged(
             (currentUser) => {
                 if(currentUser) {
                     Actions.principal();

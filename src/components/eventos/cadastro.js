@@ -63,7 +63,7 @@ export default class CadastroEvento extends Component {
             'Sucesso!',
             'Evento cadastrado com sucesso!!',
             [
-                {text: 'Concluir', onPress: () => Actions.principal({index: 1})}
+                {text: 'CONCLUIR', onPress: () => Actions.principal({index: 1})}
             ]
         );
     }
@@ -116,7 +116,7 @@ export default class CadastroEvento extends Component {
                             placeholderTextColor={'#CCC'}
                             keyboardType={'numeric'}
                             maxLength={10}
-                            onCha00ngeText={(dateEvent) => this.setState({dateEvent})}
+                            onChangeText={(dateEvent) => this.setState({dateEvent})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.dateEvent}
                         />

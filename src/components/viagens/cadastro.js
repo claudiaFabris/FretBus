@@ -71,7 +71,7 @@ export default class CadastroViagem extends Component {
             'Sucesso!',
             'Viagem cadastrada com sucesso!!',
             [
-                {text: 'Concluir', onPress: () => Actions.principal({index: 2})}
+                {text: 'CONCLUIR', onPress: () => Actions.principal({index: 2})}
             ]
         );
     }
