@@ -22,7 +22,7 @@ const Routes = () => {
                 <Scene 
                     key={'login'}
                     component={Login}
-                    initial={true}
+                    //initial={true}
                     hideNavBar={true}
                 />
                 <Scene 
@@ -78,6 +78,7 @@ const Routes = () => {
                 <Scene 
                     key={'perfil'}
                     component={Perfil}
+                    initial={true}
                     hideNavBar={true}
                 />
             </Stack>
