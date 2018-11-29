@@ -89,6 +89,7 @@ export default class CadastroOnibus extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Nome da Empresa'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             onChangeText={(company) => this.setState({company})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.company}
@@ -99,6 +100,7 @@ export default class CadastroOnibus extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Nome do Proprietário'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             onChangeText={(conductor) => this.setState({conductor})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.conductor}
@@ -109,6 +111,7 @@ export default class CadastroOnibus extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Número do Ônibus'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             onChangeText={(numberBus) => this.setState({numberBus})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.numberBus}
@@ -119,6 +122,7 @@ export default class CadastroOnibus extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Número de Poltronas'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             keyboardType={'numeric'}
                             onChangeText={(numArmchairs) => this.setState({numArmchairs})}
                             onKeyPress={() => this.fieldsInWhite()}
@@ -130,6 +134,7 @@ export default class CadastroOnibus extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Valor do Fretamento'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             keyboardType={'numeric'}
                             onChangeText={(value) => this.setState({value})}
                             onKeyPress={() => this.fieldsInWhite()}
