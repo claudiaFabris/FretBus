@@ -69,15 +69,15 @@ export default class Eventos extends Component {
                                             </Text>
                                             <Text>
                                                 <Text style={styles.textInfo}>Data: </Text> 
-                                                {item.data_evento.replace(/-/g, '/')}
+                                                {item.data_evento.replace(/-/g, '/')} às {item.horario}
                                             </Text>
                                             <Text>
                                                 <Text style={styles.textInfo}>Local: </Text> 
-                                                {`${item.cidade} - ${item.uf}`}
+                                                {item.cidade} - {item.uf}
                                             </Text>
                                             <Text>
-                                                <Text style={styles.textInfo}>Horário: </Text> 
-                                                {item.horario}
+                                                <Text style={styles.textInfo}>Ônibus: </Text> 
+                                                {item.onibus}
                                             </Text>
                                         </View>
                                     </View>

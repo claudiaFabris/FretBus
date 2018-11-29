@@ -15,7 +15,7 @@ export default class CadastroEvento extends Component {
 
         this.state = { 
             nameEvent: '', descEvent: '', dateEvent: '', 
-            city: '', uf: '', hours: '',
+            city: '', uf: '', hours: '', bus: '', list: [],
             buttonDisabled: true
         };
 
@@ -46,6 +46,17 @@ export default class CadastroEvento extends Component {
         }
     };
 
+    listBus() {
+        const onibus = firebase.database().ref('onibus');
+
+        onibus.on('value', (snapshot) => {
+            let dados = snapshot.val();
+            let itens = dados != null ? Object.values(dados) : [];
+            
+            this.setState({list: itens});
+        });       
+    }
+
     
     createEvent() {
         const events = firebase.database().ref('eventos');
@@ -56,7 +67,8 @@ export default class CadastroEvento extends Component {
             data_evento: this.state.dateEvent,
             cidade: this.state.city,
             uf: this.state.uf,
-            horario: this.state.hours
+            horario: this.state.hours,
+            onibus: this.state.bus
         });
 
         Alert.alert(
@@ -66,6 +78,10 @@ export default class CadastroEvento extends Component {
                 {text: 'CONCLUIR', onPress: () => Actions.principal({index: 1})}
             ]
         );
+    }
+
+    componentDidMount() {
+        this.listBus();
     }
 
     render() {
@@ -159,6 +175,23 @@ export default class CadastroEvento extends Component {
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.hours}
                         />
+
+                        <FormLabel labelStyle={styles.labels}>Ônibus</FormLabel>
+                        <View style={styleRegister.listBus}>
+                            <Picker
+                                selectedValue={this.state.bus}
+                                onValueChange={(bus) => this.setState({bus})}
+                                style={{color: '#FFF'}}>
+                                <Picker.Item label="Selecione o ônibus para o evento" value="" />
+                                {
+                                    this.state.list.map((item, key) => 
+                                        (
+                                            <Picker.Item key={key} label={item.empresa} value={item.empresa} />
+                                        )
+                                    )
+                                }
+                            </Picker>    
+                        </View>
 
                         <Button
                             buttonStyle={styles.button}
