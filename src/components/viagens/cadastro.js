@@ -103,6 +103,7 @@ export default class CadastroViagem extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Data da Viagem'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             keyboardType={'numeric'}
                             maxLength={10}
                             onChangeText={(date) => this.setState({date})}
@@ -115,6 +116,7 @@ export default class CadastroViagem extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Cidade da Saída'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             onChangeText={(citySource) => this.setState({citySource})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.citySource}
@@ -125,6 +127,7 @@ export default class CadastroViagem extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Cidade da Chegada'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             onChangeText={(cityDestiny) => this.setState({cityDestiny})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.cityDestiny}

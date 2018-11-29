@@ -108,6 +108,7 @@ export default class CadastroEvento extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Nome do Evento'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             maxLength={30}
                             onChangeText={(nameEvent) => this.setState({nameEvent})}
                             onKeyPress={() => this.fieldsInWhite()}
@@ -119,6 +120,7 @@ export default class CadastroEvento extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Descrição do Evento'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             multiline={true}
                             onChangeText={(descEvent) => this.setState({descEvent})}
                             onKeyPress={() => this.fieldsInWhite()}
@@ -130,6 +132,7 @@ export default class CadastroEvento extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Data do Evento'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             keyboardType={'numeric'}
                             maxLength={10}
                             onChangeText={(dateEvent) => this.setState({dateEvent})}
@@ -142,6 +145,7 @@ export default class CadastroEvento extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Cidade do Evento'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             maxLength={40}
                             onChangeText={(city) => this.setState({city})}
                             onKeyPress={() => this.fieldsInWhite()}
@@ -170,6 +174,7 @@ export default class CadastroEvento extends Component {
                             inputStyle={styles.inputs}
                             placeholder={'Horário de Início'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             maxLength={5}
                             onChangeText={(hours) => this.setState({hours})}
                             onKeyPress={() => this.fieldsInWhite()}

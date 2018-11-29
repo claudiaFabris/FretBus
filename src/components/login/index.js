@@ -83,6 +83,7 @@ export default class Login extends Component {
                     inputStyle={styles.inputs} 
                     placeholder={'joao.alvarez@exemplo.com'}
                     placeholderTextColor={'#CCC'}
+                    selectionColor={'#FFF'}
                     keyboardType={'email-address'}
                     onChangeText={(email) => this.setState({email})}
                     onKeyPress={() => this.fieldsInWhite()}
@@ -94,6 +95,7 @@ export default class Login extends Component {
                     inputStyle={styles.inputs} 
                     placeholder={'**************'}
                     placeholderTextColor={'#CCC'}
+                    selectionColor={'#FFF'}
                     secureTextEntry={true}
                     onChangeText={(password) => this.setState({password})}
                     onKeyPress={() => this.fieldsInWhite()}

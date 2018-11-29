@@ -128,6 +128,7 @@ export default class Cadastro extends Component {
                             inputStyle={styles.inputs} 
                             placeholder={'João Alvarez Fortunato'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             onChangeText={(name) => this.setState({name})}
                             onKeyPress={() => this.fieldsInWhite()}
                             value={this.state.name}
@@ -138,6 +139,7 @@ export default class Cadastro extends Component {
                             inputStyle={styles.inputs} 
                             placeholder={'00-00-0000'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             keyboardType={'numeric'}
                             maxLength={10}
                             onChangeText={(date) => this.setState({date})}
@@ -150,6 +152,7 @@ export default class Cadastro extends Component {
                             inputStyle={styles.inputs} 
                             placeholder={'000.000.000-00'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             keyboardType={'numeric'}
                             maxLength={14}
                             onChangeText={(cpf) => this.setState({cpf})}
@@ -162,6 +165,7 @@ export default class Cadastro extends Component {
                             inputStyle={styles.inputs} 
                             placeholder={'0000000000-0'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             keyboardType={'numeric'}
                             maxLength={14}
                             onChangeText={(rg) => this.setState({rg})}
@@ -174,6 +178,7 @@ export default class Cadastro extends Component {
                             inputStyle={styles.inputs} 
                             placeholder={'(00) 90000-0000'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             keyboardType={'phone-pad'}
                             maxLength={20}
                             onChangeText={(phone) => this.setState({phone})}
@@ -198,6 +203,7 @@ export default class Cadastro extends Component {
                             inputStyle={styles.inputs} 
                             placeholder={'joao.alvarez@exemplo.com'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             keyboardType={'email-address'}
                             onChangeText={(email) => this.setState({email})}
                             onKeyPress={() => this.fieldsInWhite()}
@@ -209,6 +215,7 @@ export default class Cadastro extends Component {
                             inputStyle={styles.inputs} 
                             placeholder={'**************'}
                             placeholderTextColor={'#CCC'}
+                            selectionColor={'#FFF'}
                             secureTextEntry={true}
                             onChangeText={(password) => this.setState({password})}
                             onKeyPress={() => this.fieldsInWhite()}
